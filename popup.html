@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="popup.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemini Cleaner</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <div class="header">
-    <img src="icons/icon48.png" alt="Icon" class="logo">
-    <h1>Gemini Cleaner</h1>
-  </div>
-  
-  <div class="content">
-    <div class="setting-row">
-      <div class="setting-info">
-        <span class="setting-title">Hide Ads</span>
-        <span class="setting-desc">Remove "Upgrade to Ultra" prompts</span>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+            fill="#4285F4" stroke="#4285F4" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="5" y1="5" x2="19" y2="19" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
       </div>
-      <label class="switch">
-        <input type="checkbox" id="blockerToggle">
-        <span class="slider round"></span>
+      <div class="title-block">
+        <h1>Gemini Cleaner</h1>
+        <p class="subtitle">Hide upgrade ads &amp; banners</p>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span class="toggle-label" id="status-label">Enabled</span>
+      <label class="switch" aria-label="Toggle ad blocking">
+        <input type="checkbox" id="toggle" checked />
+        <span class="slider"></span>
       </label>
     </div>
-  </div>
 
+    <div class="status-bar" id="status-bar">
+      <span class="dot active" id="status-dot"></span>
+      <span id="status-text">Blocking upgrade prompts on Gemini</span>
+    </div>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

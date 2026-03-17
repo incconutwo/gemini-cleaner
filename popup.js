@@ -1,25 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('blockerToggle');
+const toggle = document.getElementById('toggle');
+const statusLabel = document.getElementById('status-label');
+const statusBar = document.getElementById('status-bar');
+const statusDot = document.getElementById('status-dot');
+const statusText = document.getElementById('status-text');
 
-  // Load current state (default: enabled)
-  chrome.storage.sync.get({ blockGeminiAds: true }, (result) => {
-    toggle.checked = result.blockGeminiAds;
-  });
+function applyState(enabled) {
+  toggle.checked = enabled;
+  statusLabel.textContent = enabled ? 'Enabled' : 'Disabled';
 
-  // Listen for changes
-  toggle.addEventListener('change', (e) => {
-    const isEnabled = e.target.checked;
-    
-    // Save state
-    chrome.storage.sync.set({ blockGeminiAds: isEnabled });
+  if (enabled) {
+    statusBar.classList.remove('inactive');
+    statusDot.classList.remove('inactive');
+    statusText.textContent = 'Blocking upgrade prompts on Gemini';
+  } else {
+    statusBar.classList.add('inactive');
+    statusDot.classList.add('inactive');
+    statusText.textContent = 'Ad blocking is paused';
+  }
+}
 
-    // Send a message to the active tab to update immediately
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0] && tabs[0].url.includes("gemini.google.com")) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: "toggleAds", enabled: isEnabled }).catch(() => {
-          // Content script might not be injected yet or tab might be reloading
-        });
-      }
+// Load saved state using Firefox browser API
+browser.storage.sync.get({ enabled: true }).then(({ enabled }) => {
+  applyState(enabled);
+});
+
+// On toggle change
+toggle.addEventListener('change', () => {
+  const enabled = toggle.checked;
+  browser.storage.sync.set({ enabled });
+  applyState(enabled);
+
+  // Notify all active Gemini tabs
+  browser.tabs.query({ url: 'https://gemini.google.com/*' }).then(tabs => {
+    tabs.forEach(tab => {
+      browser.tabs.sendMessage(tab.id, { type: 'SET_ENABLED', enabled }).catch(() => {});
     });
   });
 });
