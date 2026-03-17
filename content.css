@@ -1,20 +1,59 @@
-/* Hide the spark-icon button and its container */
-body.gemini-ads-hidden g1-dynamic-upsell-button,
-body.gemini-ads-hidden [data-test-id="g1-dynamic-upsell-button"],
-body.gemini-ads-hidden [data-test-id="bard-g1-dynamic-upsell-menu-button"],
-body.gemini-ads-hidden [data-test-id="desktop-upgrade-tier2-button"] {
+/* Gemini Cleaner - Hide Upgrade to Ultra ads and banners */
+
+/* Top upgrade banner / announcement bar */
+.gemini-upgrade-banner,
+[data-test-id="upgrade-banner"],
+[data-test-id="upsell-banner"],
+.upgrade-to-ultra-banner,
+.announcement-bar {
   display: none !important;
 }
 
-/* Hide the large 'Upgrade to Google AI Ultra' banner container */
-body.gemini-ads-hidden .upgrade-container.g1-upsell-container,
-body.gemini-ads-hidden .upgrade-container,
-body.gemini-ads-hidden .g1-upsell-container {
+/* Sidebar upgrade prompts */
+upgrade-button,
+.upgrade-button-container,
+[data-test-id="upgrade-button"],
+[aria-label="Upgrade to Google AI Ultra"],
+[aria-label*="Upgrade"],
+button[aria-label*="Upgrade"] {
   display: none !important;
 }
 
-/* Specific selector from user prompt for desktop controls */
-body.gemini-ads-hidden .desktop-controls .ng-star-inserted:has(g1-dynamic-upsell-button),
-body.gemini-ads-hidden .desktop-controls g1-dynamic-upsell-button {
-    display: none !important;
+/* Upgrade / upsell cards and dialogs */
+.upsell-card,
+.upgrade-card,
+.upgrade-dialog,
+.gemini-ultra-promo,
+.trial-banner,
+.paywall-banner {
+  display: none !important;
+}
+
+/* Angular component selectors commonly used by Gemini's upsell UI */
+upgrade-plan-button,
+upsell-dialog,
+upsell-banner,
+upgrade-cta,
+gemini-ultra-upsell,
+.upgrade-cta-container,
+.ultra-upsell,
+.plan-upgrade-cta {
+  display: none !important;
+}
+
+/* Bottom sticky upgrade bar */
+.upgrade-sticky-bar,
+.bottom-upgrade-bar,
+[data-test-id="bottom-upgrade-bar"] {
+  display: none !important;
+}
+
+/* Generic attribute-based selectors */
+[class*="upgrade"][class*="banner"],
+[class*="upsell"],
+[class*="upgrade-cta"],
+[class*="ultra-promo"],
+[class*="gemini-ultra"][class*="promo"],
+[class*="plan-upgrade"] {
+  display: none !important;
 }
