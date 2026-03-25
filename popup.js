@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Send a message to the active tab to update immediately
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs[0] && tabs[0].url.includes("gemini.google.com")) {
+      if (tabs[0]) {
         chrome.tabs.sendMessage(tabs[0].id, { action: "toggleAds", enabled: isEnabled }).catch(() => {
           // Content script might not be injected yet or tab might be reloading
         });

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Gemini Cleaner - Hide Upgrade Prompts",
-  "version": "1.0",
-  "description": "Hides the 'Upgrade to Google AI Ultra' ads on Gemini.",
+  "version": "1.0.1",
+  "description": "The #1 minimalist tool to hide \"Upgrade to Ultra\" ads and banners on Gemini AI. Perfect for both free and pro users!",
   "permissions": [
     "storage"
   ],
